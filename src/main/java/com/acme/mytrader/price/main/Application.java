@@ -12,7 +12,7 @@ import com.acme.mytrader.price.PriceListener;
 import com.acme.mytrader.price.impl.PriceListenerImpl;
 
 /**
- * Created by gkatzioura on 5/28/16.
+ * Created by sakthivelan on 8/24/22.
  */
 @SpringBootApplication
 @ComponentScan("com.acme.mytrader")
