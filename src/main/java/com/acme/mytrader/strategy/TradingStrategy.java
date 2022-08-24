@@ -1,11 +1,14 @@
 package com.acme.mytrader.strategy;
 
-import org.aspectj.lang.annotation.After;
-import org.aspectj.lang.annotation.Aspect;
+import java.util.HashMap;
+import java.util.Map;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Service;
 
 import com.acme.mytrader.execution.ExecutionService;
+import com.acme.mytrader.price.PriceListener;
 
 /**
  * <pre>
@@ -13,15 +16,18 @@ import com.acme.mytrader.execution.ExecutionService;
  * that when they breach a trigger level orders can be executed automatically
  * </pre>
  */
-@Aspect
-@Component
-public class TradingStrategy {
+@Service
+public class TradingStrategy implements PriceListener {
 	
-	@Autowired
+	//@Autowired
+	//Autowired should be enabled once the component service is available for executionservice
 	ExecutionService executionService;
-	@After("execution (* com.acme.mytrader.price.impl.PriceListenerImpl.priceUpdate(*,*)) && args(security,price)")
-	   public void afterReturningAdvice(String security,double price) throws Throwable {
-		
+	//This will be changed according to buy implementation. This should come from buy.
+	Map securityPriceList = new HashMap<String, Double>();
+	
+	@Override
+	public void priceUpdate(String security, double price) {
+		securityPriceList.put(security, price);
 		switch(security) {
 		case "TCS":
 			if(price>55.0)
@@ -29,6 +35,5 @@ public class TradingStrategy {
 			else
 				executionService.buy(security, price, 100);
 		}
-		
 	}
 }

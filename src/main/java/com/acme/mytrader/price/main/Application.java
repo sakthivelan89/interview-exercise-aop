@@ -1,32 +1,26 @@
 package com.acme.mytrader.price.main;
 
-import java.util.Arrays;
-
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.ConfigurableApplicationContext;
 import org.springframework.context.annotation.ComponentScan;
-import org.springframework.context.annotation.EnableAspectJAutoProxy;
 
 import com.acme.mytrader.price.PriceListener;
-import com.acme.mytrader.price.impl.PriceListenerImpl;
+import com.acme.mytrader.strategy.TradingStrategy;
 
 /**
- * Created by sakthivelan on 8/24/22.
+ * Created by sakthivelan on 8/22/22.
  */
 @SpringBootApplication
 @ComponentScan("com.acme.mytrader")
-@EnableAspectJAutoProxy(proxyTargetClass=true)  
+@ComponentScan("com.acme.mytrader.strategy")
 public class Application {
 
     public static void main(String[] args) {
 
-        ConfigurableApplicationContext ac = SpringApplication.run(Application.class, args);  
-        System.out.println("Bean names: " + Arrays.toString(ac.getBeanNamesForType(PriceListenerImpl.class)));
-
-        PriceListener priceListener = ac.getBean(PriceListenerImpl.class);  
-
-        priceListener.priceUpdate("TCS",54);  
+      ConfigurableApplicationContext ac = SpringApplication.run(Application.class, args);  
+      PriceListener priceListener = ac.getBean(TradingStrategy.class);  
+      priceListener.priceUpdate("TCS",54);  
       
 
     }
