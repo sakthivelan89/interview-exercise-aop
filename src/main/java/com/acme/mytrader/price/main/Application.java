@@ -13,7 +13,6 @@ import com.acme.mytrader.strategy.TradingStrategy;
  */
 @SpringBootApplication
 @ComponentScan("com.acme.mytrader")
-@ComponentScan("com.acme.mytrader.strategy")
 public class Application {
 
     public static void main(String[] args) {
