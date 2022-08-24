@@ -21,14 +21,12 @@ public class Application {
 
     public static void main(String[] args) {
 
-       // ApplicationContext applicationContext = springApplication.run(Application.class,args);
         ConfigurableApplicationContext ac = SpringApplication.run(Application.class, args);  
-      //Fetching the account object from the application context  
         System.out.println("Bean names: " + Arrays.toString(ac.getBeanNamesForType(PriceListenerImpl.class)));
 
-      PriceListener accountService = ac.getBean(PriceListenerImpl.class);  
+        PriceListener priceListener = ac.getBean(PriceListenerImpl.class);  
 
-      accountService.priceUpdate("TCS",54);  
+        priceListener.priceUpdate("TCS",54);  
       
 
     }
