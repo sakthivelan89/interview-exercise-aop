@@ -2,10 +2,8 @@ package com.acme.mytrader.price.main;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.context.ConfigurableApplicationContext;
 import org.springframework.context.annotation.ComponentScan;
 
-import com.acme.mytrader.price.PriceListener;
 import com.acme.mytrader.strategy.TradingStrategy;
 
 /**
@@ -13,14 +11,10 @@ import com.acme.mytrader.strategy.TradingStrategy;
  */
 @SpringBootApplication
 @ComponentScan("com.acme.mytrader")
+@ComponentScan("com.acme.mytrader.strategy")
 public class Application {
 
     public static void main(String[] args) {
-
-      ConfigurableApplicationContext ac = SpringApplication.run(Application.class, args);  
-      PriceListener priceListener = ac.getBean(TradingStrategy.class);  
-      priceListener.priceUpdate("TCS",54);  
-      
-
+      SpringApplication.run(Application.class, args);
     }
 }
