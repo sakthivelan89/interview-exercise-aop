@@ -26,7 +26,7 @@ public class TradingStrategy implements PriceListener {
 	private String security;
 	private Double price;
 	private int volume;
-
+	private Double thresholdValue;
 
 
 
@@ -36,11 +36,12 @@ public class TradingStrategy implements PriceListener {
 	 * @param price
 	 * @param volume
 	 */
-	public TradingStrategy(@Value("${security}") String security, @Value("${price}")String price,@Value("${volume}") String volume) {
+	public TradingStrategy(@Value("${security}") String security, @Value("${price}")String price,@Value("${volume}") String volume, @Value("thresholdValue") String thresholdValue) {
 		super();
 		this.security = security;
 		this.price = Double.valueOf(price);
 		this.volume =Integer.valueOf(volume);
+		this.thresholdValue=Double.valueOf(thresholdValue);
 	}
 
 
@@ -51,7 +52,7 @@ public class TradingStrategy implements PriceListener {
 	public void priceUpdate(String security, double price) {
 		switch(security) {
 		case "TCS":
-			if(price>55.0)
+			if(price>this.thresholdValue)
 				executionService.sell(this.security, this.price, this.volume);
 			else
 				executionService.buy(this.security, this.price, this.volume);
