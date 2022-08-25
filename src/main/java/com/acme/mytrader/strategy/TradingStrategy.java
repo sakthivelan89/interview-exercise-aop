@@ -30,8 +30,7 @@ public class TradingStrategy implements PriceListener {
 	 * @param price
 	 * @param volume
 	 */
-	public TradingStrategy(@Value("${security}") String security, @Value("${price}")String price,@Value("${volume}") String volume, @Value("thresholdValue") String thresholdValue) {
-		super();
+	public TradingStrategy(@Value("${security}") String security, @Value("${price}")String price,@Value("${volume}") String volume, @Value("${thresholdValue}") String thresholdValue) {
 		this.security = security;
 		this.price = Double.valueOf(price);
 		this.volume =Integer.valueOf(volume);
