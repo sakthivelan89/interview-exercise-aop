@@ -50,13 +50,12 @@ public class TradingStrategy implements PriceListener {
 
 	@Override
 	public void priceUpdate(String security, double price) {
-		switch(security) {
-		case "TCS":
-			if(price>this.thresholdValue)
-				executionService.sell(this.security, this.price, this.volume);
-			else
+
+			if(price<this.thresholdValue)
 				executionService.buy(this.security, this.price, this.volume);
-		}
+			//else
+			//	executionService.sell(this.security, this.price, this.volume);
+
 	}
 
 }
