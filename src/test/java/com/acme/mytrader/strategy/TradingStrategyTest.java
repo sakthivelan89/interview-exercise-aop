@@ -42,12 +42,10 @@ public class TradingStrategyTest {
 
     @Test
     public void testBuyScenario() throws Throwable {
-
         doNothing().when(tStrategy).priceUpdate(security, Double.valueOf(price));
         assertTrue(Double.valueOf(price)<Double.valueOf(thresholdValue));
         eService.buy(security, Double.valueOf(price), Integer.valueOf(volume));
         verify(eService, atLeastOnce()).buy(anyString(),anyDouble(),anyInt());
-
     }
 
 }

@@ -1,11 +1,8 @@
 package com.acme.mytrader.strategy;
-
 import java.util.HashMap;
 import java.util.Map;
-
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
-
 import com.acme.mytrader.execution.ExecutionService;
 import com.acme.mytrader.price.PriceListener;
 
@@ -28,9 +25,6 @@ public class TradingStrategy implements PriceListener {
 	private int volume;
 	private Double thresholdValue;
 
-
-
-
 	/**
 	 * @param security
 	 * @param price
@@ -43,19 +37,14 @@ public class TradingStrategy implements PriceListener {
 		this.volume =Integer.valueOf(volume);
 		this.thresholdValue=Double.valueOf(thresholdValue);
 	}
-
-
-
-
-
+    /**
+	 * @param security
+	 * @param price
+	 */
 	@Override
 	public void priceUpdate(String security, double price) {
-
-			if(price<this.thresholdValue)
-				executionService.buy(this.security, this.price, this.volume);
-			//else
-			//	executionService.sell(this.security, this.price, this.volume);
-
+		if(price<this.thresholdValue)
+			executionService.buy(this.security, this.price, this.volume);
 	}
 
 }
